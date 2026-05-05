@@ -31,8 +31,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Visitor can read `/legal/privacy-policy` and `/legal/terms-and-conditions`
   4. Visitor on a 375px-wide mobile viewport sees a fully responsive, navigable site (70%+ of SEA traffic target)
   5. Visitor can reach `/login` and see a magic-link email input form (form submission wired in Phase 2)
-**Plans**: TBD
+**Plans**: 4 plans
 **UI hint**: yes
+
+Plans:
+- [ ] 01-01-PLAN.md — Design system init, globals.css, root layout, marketing layout shell, TopNav, Footer
+- [ ] 01-02-PLAN.md — Home page: HeroSection with CSS animated demo, ValuePropsGrid, PricingTeaser
+- [ ] 01-03-PLAN.md — Pricing page: PricingCardGrid, PricingCard (monthly + lifetime, stubbed CTAs)
+- [ ] 01-04-PLAN.md — Login page with validated no-op form; /legal/privacy-policy and /legal/terms-and-conditions
 
 ### Phase 2: Auth Foundation
 **Goal**: Magic-link authentication is fully operational via Supabase + Resend, the Data Access Layer (DAL) pattern is enforced, `proxy.ts` (Next.js 16's renamed middleware) protects routes, and session continuity works across refresh and tabs — establishing the security primitives Phase 4's webhook handler will call into.
