@@ -134,65 +134,71 @@
 
 ## Traceability
 
-*(Populated by roadmapper — updated after roadmap creation)*
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | — | Pending |
-| AUTH-02 | — | Pending |
-| AUTH-03 | — | Pending |
-| AUTH-04 | — | Pending |
-| AUTH-05 | — | Pending |
-| PAY-01 | — | Pending |
-| PAY-02 | — | Pending |
-| PAY-03 | — | Pending |
-| PAY-04 | — | Pending |
-| PAY-05 | — | Pending |
-| PAY-06 | — | Pending |
-| PAY-07 | — | Pending |
-| PAY-08 | — | Pending |
-| PAY-09 | — | Pending |
-| PAY-10 | — | Pending |
-| GATE-01 | — | Pending |
-| GATE-02 | — | Pending |
-| GATE-03 | — | Pending |
-| GATE-04 | — | Pending |
-| GATE-05 | — | Pending |
-| CONTENT-01 | — | Pending |
-| CONTENT-02 | — | Pending |
-| CONTENT-03 | — | Pending |
-| CONTENT-04 | — | Pending |
-| CONTENT-05 | — | Pending |
-| CONTENT-06 | — | Pending |
-| DASH-01 | — | Pending |
-| DASH-02 | — | Pending |
-| DASH-03 | — | Pending |
-| DASH-04 | — | Pending |
-| DASH-05 | — | Pending |
-| DASH-06 | — | Pending |
-| RES-01 | — | Pending |
-| RES-02 | — | Pending |
-| RES-03 | — | Pending |
-| RES-04 | — | Pending |
-| RES-05 | — | Pending |
-| RES-06 | — | Pending |
-| MKT-01 | — | Pending |
-| MKT-02 | — | Pending |
-| MKT-03 | — | Pending |
-| MKT-04 | — | Pending |
-| MKT-05 | — | Pending |
-| MKT-06 | — | Pending |
-| ACCT-01 | — | Pending |
-| ACCT-02 | — | Pending |
-| EMAIL-01 | — | Pending |
-| EMAIL-02 | — | Pending |
-| EMAIL-03 | — | Pending |
+| AUTH-01 | Phase 2 | Pending |
+| AUTH-02 | Phase 2 | Pending |
+| AUTH-03 | Phase 2 | Pending |
+| AUTH-04 | Phase 2 | Pending |
+| AUTH-05 | Phase 4 | Pending |
+| PAY-01 | Phase 4 | Pending |
+| PAY-02 | Phase 4 | Pending |
+| PAY-03 | Phase 4 | Pending |
+| PAY-04 | Phase 4 | Pending |
+| PAY-05 | Phase 4 | Pending |
+| PAY-06 | Phase 4 | Pending |
+| PAY-07 | Phase 4 | Pending |
+| PAY-08 | Phase 4 | Pending |
+| PAY-09 | Phase 4 | Pending |
+| PAY-10 | Phase 4 | Pending |
+| GATE-01 | Phase 3 | Pending |
+| GATE-02 | Phase 5 | Pending |
+| GATE-03 | Phase 5 | Pending |
+| GATE-04 | Phase 5 | Pending |
+| GATE-05 | Phase 2 | Pending |
+| CONTENT-01 | Phase 3 | Pending |
+| CONTENT-02 | Phase 3 | Pending |
+| CONTENT-03 | Phase 3 | Pending |
+| CONTENT-04 | Phase 3 | Pending |
+| CONTENT-05 | Phase 3 | Pending |
+| CONTENT-06 | Phase 3 | Pending |
+| DASH-01 | Phase 5 | Pending |
+| DASH-02 | Phase 5 | Pending |
+| DASH-03 | Phase 6 | Pending |
+| DASH-04 | Phase 5 | Pending |
+| DASH-05 | Phase 6 | Pending |
+| DASH-06 | Phase 6 | Pending |
+| RES-01 | Phase 5 | Pending |
+| RES-02 | Phase 5 | Pending |
+| RES-03 | Phase 5 | Pending |
+| RES-04 | Phase 5 | Pending |
+| RES-05 | Phase 5 | Pending |
+| RES-06 | Phase 5 | Pending |
+| MKT-01 | Phase 1 | Pending |
+| MKT-02 | Phase 1 | Pending |
+| MKT-03 | Phase 3 | Pending |
+| MKT-04 | Phase 1 | Pending |
+| MKT-05 | Phase 1 | Pending |
+| MKT-06 | Phase 1 | Pending |
+| ACCT-01 | Phase 4 | Pending |
+| ACCT-02 | Phase 4 | Pending |
+| EMAIL-01 | Phase 4 | Pending |
+| EMAIL-02 | Phase 2 | Pending |
+| EMAIL-03 | Phase 2 | Pending |
 
 **Coverage:**
-- v1 requirements: 48 total
-- Mapped to phases: 0 (roadmap pending)
-- Unmapped: 48 ⚠️
+- v1 requirements: 49 total (header previously stated 48 — itemized list contains 49)
+- Mapped to phases: 49 ✓
+- Unmapped: 0
+
+**By phase:**
+- Phase 1 (Marketing Surface): 5 — MKT-01, MKT-02, MKT-04, MKT-05, MKT-06
+- Phase 2 (Auth Foundation): 7 — AUTH-01, AUTH-02, AUTH-03, AUTH-04, GATE-05, EMAIL-02, EMAIL-03
+- Phase 3 (Content Pipeline & Free-Tier Browse): 8 — CONTENT-01, CONTENT-02, CONTENT-03, CONTENT-04, CONTENT-05, CONTENT-06, MKT-03, GATE-01
+- Phase 4 (Payments & Webhooks): 14 — PAY-01..10, AUTH-05, EMAIL-01, ACCT-01, ACCT-02
+- Phase 5 (Paid Content Delivery): 12 — GATE-02, GATE-03, GATE-04, RES-01..06, DASH-01, DASH-02, DASH-04
+- Phase 6 (Discovery & Bookmarks): 3 — DASH-03, DASH-05, DASH-06
 
 ---
 *Requirements defined: 2026-05-05*
-*Last updated: 2026-05-05 after initial definition*
+*Traceability populated: 2026-05-05 by roadmapper*
