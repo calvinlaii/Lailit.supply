@@ -115,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Marketing Surface | 0/TBD | Not started | - |
+| 1. Marketing Surface | 4/4 | Human verification pending | 2026-05-06 |
 | 2. Auth Foundation | 0/TBD | Not started | - |
 | 3. Content Pipeline & Free-Tier Browse | 0/TBD | Not started | - |
 | 4. Payments & Webhooks | 0/TBD | Not started | - |
