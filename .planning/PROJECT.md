@@ -45,12 +45,12 @@ A premium, multi-platform component library built specifically for the Indonesia
 - **Payment architecture**: Mayar.id handles checkout, recurring billing, and customer portal. The backend receives webhooks to create user accounts and manage access. No account creation before payment — cleaner UX.
 - **Content strategy**: Resources ship in 5 formats (Framer, Webflow, HTML, JSX, TSX). MDX files in the repo for MVP. Each resource has: preview thumbnail (avif), short video preview, live demo, per-format code blocks with copy buttons.
 - **Free vs paid split**: A subset of resources is permanently free (no login required or free-tier login). Premium resources are locked behind membership. This is the lead magnet — no separate `/coba` demo route needed.
-- **Tech stack confirmed**: Next.js 15 App Router, Supabase (Postgres + Auth helpers), Mayar.id, Resend (magic link + transactional email), Vercel, Discord community.
+- **Tech stack confirmed**: Next.js 16.2.4 App Router, Supabase (Postgres + `@supabase/ssr`), Mayar.id, Resend (magic link + transactional email), Vercel, Discord community.
 - **Existing codebase**: Create Next App starter at project root — no product code yet.
 
 ## Constraints
 
-- **Tech stack**: Next.js 15 App Router — no Pages Router
+- **Tech stack**: Next.js 16.2.4 App Router — no Pages Router
 - **Payments**: Mayar.id only at MVP — IDR-native, no Stripe
 - **Database**: Supabase Postgres — use Supabase Auth helpers for session management
 - **Hosting**: Vercel — optimize for serverless edge functions
