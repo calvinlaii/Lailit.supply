@@ -38,12 +38,12 @@ export function UserMenu({ email }: UserMenuProps) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="min-w-[160px]">
-        <DropdownMenuItem asChild>
-          <form action={signOut}>
+        <DropdownMenuItem className="p-0">
+          <form action={signOut} className="w-full">
             <button
               type="submit"
               aria-label="Keluar dari akun"
-              className="w-full text-left text-base font-normal text-neutral-950"
+              className="w-full px-1.5 py-1 text-left text-base font-normal text-neutral-950"
             >
               Keluar
             </button>
