@@ -1,7 +1,8 @@
 ---
 phase: 02
 slug: auth-foundation
-status: draft
+status: approved
+reviewed_at: 2026-05-06
 shadcn_initialized: true
 preset: "style: base-nova, baseColor: neutral, cssVariables: true"
 created: 2026-05-06
@@ -191,12 +192,12 @@ Background: neutral-50 (bg-neutral-50)
 Shadow: none (stub state — not yet a real card)
 
 Content:
-  - Overline (label, muted, tracking-widest, uppercase 12px): "SEGERA HADIR"
+  - Overline (label, muted, tracking-widest, uppercase 14px / 0.875rem): "SEGERA HADIR"
   - Heading (heading size 28px, weight 600, mt-3): "Komponen pertama sedang disiapkan."
   - Body (body size 16px, weight 400, muted, mt-4): "Kamu sudah masuk. Komponen segera hadir — pantau terus."
 ```
 
-**Why tracking-widest on overline:** The all-caps overline label at 12px uses `tracking-widest` (`letter-spacing: 0.1em`) as an exception to the no-tracking rule — small-caps labels conventionally benefit from wide tracking for readability. This is the only instance of wide tracking in Phase 2; it does not extend to other elements.
+**Why tracking-widest on overline:** The all-caps overline label at 14px / 0.875rem (Label role) uses `tracking-widest` (`letter-spacing: 0.1em`) as an exception to the no-tracking rule — small-caps labels conventionally benefit from wide tracking for readability. This is the only instance of wide tracking in Phase 2; it does not extend to other elements.
 
 ### Q5 — Error banner on /login?error=link-expired: Inline alert or toast?
 
@@ -406,7 +407,7 @@ All copy is Bahasa Indonesia primary (inherited from P1 CTX D-08). Voice: builde
 |---------|------|-------|
 | Page heading (h1) | `Dashboard` | Heading size, weight 600 |
 | Page subtext | `Selamat datang, {email}. Komponen segera hadir.` | Body, muted. `{email}` replaced server-side from DAL. |
-| Stub card overline | `SEGERA HADIR` | 12px, uppercase, weight 400, tracking-widest, muted. NOT bold. |
+| Stub card overline | `SEGERA HADIR` | 14px / 0.875rem (Label role), uppercase, weight 400, tracking-widest, muted. NOT bold. |
 | Stub card heading | `Komponen pertama sedang disiapkan.` | Heading size (28px), weight 600 |
 | Stub card body | `Kamu sudah masuk. Komponen segera hadir — pantau terus.` | Body (16px), muted |
 
@@ -474,8 +475,8 @@ No third-party registries declared. No vetting gate triggered.
 - [ ] Dimension 1 Copywriting: PASS (Bahasa Indonesia consistent, all states covered — loading, success, link-expired, server-error, logout, stub card)
 - [ ] Dimension 2 Visuals: PASS (top bar nav decision documented with Phase 5 extensibility note; no new elevation tokens; dashed stub card border distinguishes from production content)
 - [ ] Dimension 3 Color: PASS (60/30/10 split maintained; avatar fill is `neutral-950` ink — within the accent reserved list)
-- [ ] Dimension 4 Typography: PASS (no new sizes or weights; all Phase 2 type maps to the same 4-size/2-weight scale)
-- [ ] Dimension 5 Spacing: PASS (multiples of 4 only; single 44px exception inherited; 12px overline tracking noted as explicit exception)
+- [ ] Dimension 4 Typography: PASS (no new sizes or weights; overline absorbed into Label role at 14px / 0.875rem with tracking-widest uppercase — 4-size/2-weight scale maintained)
+- [ ] Dimension 5 Spacing: PASS (multiples of 4 only; single 44px exception inherited; overline tracking-widest noted as explicit exception (no new spacing token))
 - [ ] Dimension 6 Registry Safety: PASS (shadcn official only — `avatar` and `dropdown-menu` are standard registry components)
 
 **Approval:** pending
