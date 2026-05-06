@@ -50,9 +50,14 @@ Plans:
   3. User clicks "Log out" from any authenticated page and is signed out cleanly
   4. The magic link expires exactly 24 hours after issuance (Supabase OTP expiry = 86400s) and a fresh link can always be requested from `/login`
   5. Every server-side identity check goes through `getUser()` in a `cache()`-wrapped DAL — `getSession()` is grep-blocked in CI
-**Plans**: TBD
+**Plans**: 3 plans
 **UI hint**: yes
 **Notes**: Establishes the Supabase client instantiation discipline (per-request, never module-scope) flagged as catastrophic-pitfall #4 in research. `middleware.ts` does NOT exist in this codebase — use `proxy.ts` per Next.js 16.
+
+Plans:
+- [ ] 02-01-PLAN.md — Install Supabase packages, env setup, supabase client files (client.ts, server.ts, admin.ts, middleware.ts), DAL (dal.ts), proxy.ts
+- [ ] 02-02-PLAN.md — Login Server Action (actions.ts), LoginForm wiring (useActionState), LoginErrorAlert, /auth/confirm route handler
+- [ ] 02-03-PLAN.md — Dashboard shell: (dashboard) route group layout (auth gate), dashboard stub page, DashboardNav, UserMenu, DashboardStubCard, logout action
 
 ### Phase 3: Content Pipeline & Free-Tier Browse
 **Goal**: The MDX-in-repo content architecture is established, 20–30 seed resources ship across categories with AVIF thumbnails and Mux videos, a typed Zod-validated build-time manifest is generated, and the public `/explore` (free-tier) page lets unauthenticated visitors browse and view free resources — proving the lead magnet and unblocking Phase 4 paywall pen-tests with real seed data.
@@ -116,7 +121,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Marketing Surface | 4/4 | Human verification pending | 2026-05-06 |
-| 2. Auth Foundation | 0/TBD | Not started | - |
+| 2. Auth Foundation | 0/3 | Planned | - |
 | 3. Content Pipeline & Free-Tier Browse | 0/TBD | Not started | - |
 | 4. Payments & Webhooks | 0/TBD | Not started | - |
 | 5. Paid Content Delivery | 0/TBD | Not started | - |
