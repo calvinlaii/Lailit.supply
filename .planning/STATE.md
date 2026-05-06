@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-05-05)
 
 **Core value:** A premium, multi-platform component library built specifically for the Indonesian/SEA creative dev market — the only one in this niche.
-**Current focus:** Phase 1 — Marketing Surface
+**Current focus:** Phase 3 — Content Pipeline & Free-Tier Browse
 
 ## Current Position
 
-Phase: 1 of 6 (Marketing Surface)
-Plan: 4 of 4 in current phase
-Status: Human verification pending — browser tests required before advancing to Phase 2
-Last activity: 2026-05-06 — Phase 1 executed: all 4 plans complete, build passes, 6 tests pass
+Phase: 2 of 6 (Auth Foundation)
+Plan: 3 of 3 in current phase
+Status: Human verification pending — browser tests require live Supabase project with env vars
+Last activity: 2026-05-06 — Phase 2 executed: all 3 plans complete, build passes, 8 tests pass, 13/13 code checks verified
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -44,6 +44,7 @@ Recent decisions affecting current work:
 
 - Init: Indonesia/SEA-first market, Mayar.id (IDR-native), magic-link auth, free-tier (not demo route), monthly + lifetime only at MVP, MDX in repo, Supabase Postgres
 - Init: Next.js 16 with `proxy.ts` (not `middleware.ts`), `@supabase/ssr` (not deprecated auth-helpers), `@next/mdx` (not `next-mdx-remote` — CVE-2026-0969), strict architectural phase ordering enforced by research
+- Phase 2: DAL pattern enforced (`server-only` on dal.ts + admin.ts), `proxy.ts` protects /dashboard + /account, re-login flow uses `shouldCreateUser: false` (no user enumeration), post-login redirect to /dashboard, Supabase default email template
 
 ### Pending Todos
 
@@ -71,6 +72,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-05
-Stopped at: Phase 1 executed — 4 plans complete. Pending: browser verification of 375px mobile layout, hero animation, login form. Run `npm run dev` and test manually.
+Last session: 2026-05-06
+Stopped at: Phase 2 executed — 3 plans complete. Pending: browser verification of 7 auth UAT items (requires Supabase project setup + .env.local). See 02-HUMAN-UAT.md for setup steps.
 Resume file: None
