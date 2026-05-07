@@ -53,6 +53,8 @@ Source: `src/components/marketing/pricing-card.tsx`, `src/components/dashboard/d
 
 All values confirmed from existing codebase — do not deviate.
 
+Declared weights: `font-normal (400)` and `font-semibold (600)` — 2 weights maximum.
+
 | Role | Size | Weight | Line Height | Tracking |
 |------|------|--------|-------------|---------|
 | Body | 16px (text-base) | 400 (font-normal) | 1.5 | — |
@@ -62,7 +64,7 @@ All values confirmed from existing codebase — do not deviate.
 
 Notes:
 - Phase 4 introduces no new type sizes. The `/account` page heading uses the established pattern: `text-[1.75rem] lg:text-[2.5rem] font-semibold leading-[1.15] tracking-[-0.02em]`.
-- Status badge text: 12px (text-xs), weight 500 (font-medium) — consistent with existing Badge component.
+- Status badge text: 12px (text-xs) — the Badge component (`src/components/ui/badge.tsx`) may internally render at `font-medium (500)` as an existing-component behavior. This is not a weight prescribed by this phase's type contract; do not use `font-medium` in any new Phase 4 code.
 
 Source: `src/app/(dashboard)/dashboard/page.tsx`, `src/components/marketing/pricing-card.tsx`, `src/components/ui/badge.tsx`
 
