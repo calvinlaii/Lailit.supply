@@ -1,6 +1,7 @@
 'use client'
 
 import { ChevronDown, User } from 'lucide-react'
+import { useClerk } from '@clerk/nextjs'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,11 +9,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { signOut } from '@/app/(dashboard)/dashboard/actions'
 
 type UserMenuProps = { email: string }
 
 export function UserMenu({ email }: UserMenuProps) {
+  const { signOut } = useClerk()
   const initial = email.charAt(0).toUpperCase()
 
   return (
@@ -39,15 +40,14 @@ export function UserMenu({ email }: UserMenuProps) {
 
       <DropdownMenuContent align="end" className="min-w-[160px]">
         <DropdownMenuItem className="p-0">
-          <form action={signOut} className="w-full">
-            <button
-              type="submit"
-              aria-label="Keluar dari akun"
-              className="w-full px-1.5 py-1 text-left text-base font-normal text-neutral-950"
-            >
-              Keluar
-            </button>
-          </form>
+          <button
+            type="button"
+            onClick={() => signOut({ redirectUrl: '/' })}
+            aria-label="Keluar dari akun"
+            className="w-full px-1.5 py-1 text-left text-base font-normal text-neutral-950"
+          >
+            Keluar
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
