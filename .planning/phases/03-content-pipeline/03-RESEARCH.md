@@ -696,22 +696,16 @@ However, if using the Pattern 5 (programmatic `@mdx-js/mdx` compile for per-form
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Programmatic MDX compile vs. @next/mdx dynamic import for format files**
-   - What we know: Turbopack has static analysis constraints on dynamic imports with template literals.
-   - What's unclear: Whether the pattern `import(\`content/resources/${slug}/${format}.mdx\`)` actually fails in the Turbopack + @next/mdx build, or whether @next/mdx handles this at the loader level.
-   - Recommendation: The Wave 0 spike plan should test both approaches and pick the one that builds cleanly.
+   - RESOLVED: Use Pattern 5 programmatic `@mdx-js/mdx` `compile()` + `run()` for per-format files. Dynamic template-literal imports fail Turbopack static analysis. Plans use `fs.readFileSync` + programmatic compile.
 
 2. **next.config.ts vs. next.config.mjs for @next/mdx**
-   - What we know: Docs say both are supported for ESM imports.
-   - What's unclear: Whether `import createMDX from '@next/mdx'` works in a `.ts` file without converting to `.mjs`.
-   - Recommendation: The existing project uses `next.config.ts`. Try it first; convert to `.mjs` only if TypeScript import fails.
+   - RESOLVED: Keep `next.config.ts`. Verified against local Next.js 16 docs — TypeScript config is fully supported for ESM plugin imports. No rename needed.
 
 3. **gray-matter or @next/mdx export const for frontmatter**
-   - What we know: The Next.js MDX docs show two frontmatter approaches: (a) `export const metadata = {}` inside MDX files, (b) external `gray-matter` parsing.
-   - What's unclear: Approach (a) would require importing every MDX file to read metadata — slower. Approach (b) with gray-matter is faster for manifest generation.
-   - Recommendation: Use gray-matter for manifest generation (approach b). Keep `export const metadata` as an optional pattern for Next.js SEO metadata.
+   - RESOLVED: Use `gray-matter` for manifest generation (approach b). Faster — does not require importing every MDX file. Plans use `gray-matter` + `fast-glob` for the manifest module.
 
 ---
 
