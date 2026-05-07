@@ -1,7 +1,8 @@
 ---
 phase: 3
 slug: 03-content-pipeline
-status: draft
+status: approved
+reviewed_at: 2026-05-07
 shadcn_initialized: true
 preset: base-nova
 created: 2026-05-07
@@ -58,7 +59,7 @@ Exactly 4 sizes, 2 weights. Inherited from Phase 1 type scale. Geist Sans only (
 | Role | Size | Weight | Line Height | Usage in Phase 3 |
 |------|------|--------|-------------|-----------------|
 | Display / H1 | 48px (text-5xl) | 600 semibold | 1.15 | /explore page section heading ("Jelajahi Komponen") |
-| Heading / H2–H3 | 24px (text-2xl) — 32px (text-3xl) | 600 semibold | 1.2 | Resource detail page title |
+| Heading / H2–H3 | 32px (text-3xl) | 600 semibold | 1.2 | Resource detail page title, section subheadings |
 | Body | 16px (text-base) | 400 regular | 1.5 | Card descriptions, category label text, tab content prose |
 | Label / Small | 14px (text-sm) | 400 regular | 1.45 | Badge text, chip label, format tab label, copy button label, paywall stub text |
 
@@ -229,6 +230,15 @@ Mobile: single column stacked — media first, then tabs/code below.
 - Icon: lucide `Search`, 32px, `text-muted-foreground`
 - Heading: "Tidak ada komponen" (16px, semibold)
 - Body: "Coba pilih kategori lain." (14px, regular, text-muted-foreground)
+
+### Not Found State (`/explore/[slug]` — invalid slug)
+
+- Triggered when a resource slug does not exist in the manifest
+- Layout: centered, `py-24 text-center`
+- Icon: lucide `PackageX`, 32px, `text-muted-foreground`
+- Heading: "Komponen tidak ditemukan" (16px, semibold)
+- Body: "Komponen ini tidak tersedia atau sudah dihapus." (14px, regular, text-muted-foreground)
+- Link: "← Kembali ke Jelajahi" → href="/explore" (text link, 14px)
 
 ---
 
