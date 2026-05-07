@@ -1,16 +1,83 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { WelcomeEmail } from "@/emails/WelcomeEmail";
 
-// WelcomeEmail will be created in Plan 02
-// These tests will be RED until Plan 02 creates src/emails/WelcomeEmail.tsx
+describe("WelcomeEmail", () => {
+  it("renders user name in greeting when name is provided", () => {
+    render(
+      WelcomeEmail({
+        name: "Budi",
+        magicLink: "https://example.com/magic",
+        plan: "Bulanan",
+      })
+    );
+    expect(screen.getByText(/Hei Budi/)).toBeDefined();
+  });
 
-describe("WelcomeEmail (EMAIL-01)", () => {
-  it.todo("renders user name in greeting when name is provided");
-  it.todo("renders generic greeting when name is empty string");
-  it.todo("renders plan name 'Bulanan' in body copy");
-  it.todo("renders plan name 'Seumur Hidup' in body copy");
-  it.todo("renders 'Masuk ke Dashboard' magic link button");
-  it.todo("magic link button href matches the magicLink prop value");
-  it.todo("renders subject-matching preview text 'Selamat datang di lailit.supply'");
-  it.todo("renders disclaimer text 'Link ini berlaku untuk sekali login'");
+  it("renders generic greeting when name is empty string", () => {
+    render(
+      WelcomeEmail({
+        name: "",
+        magicLink: "https://example.com/magic",
+        plan: "Bulanan",
+      })
+    );
+    expect(screen.getByText(/Hei!/)).toBeDefined();
+  });
+
+  it("renders Bulanan in body text when plan is Bulanan", () => {
+    render(
+      WelcomeEmail({
+        name: "Budi",
+        magicLink: "https://example.com/magic",
+        plan: "Bulanan",
+      })
+    );
+    expect(screen.getByText(/Bulanan/)).toBeDefined();
+  });
+
+  it("renders Seumur Hidup in body text when plan is Seumur Hidup", () => {
+    render(
+      WelcomeEmail({
+        name: "Budi",
+        magicLink: "https://example.com/magic",
+        plan: "Seumur Hidup",
+      })
+    );
+    expect(screen.getByText(/Seumur Hidup/)).toBeDefined();
+  });
+
+  it("renders a link with the magic link href", () => {
+    render(
+      WelcomeEmail({
+        name: "Budi",
+        magicLink: "https://example.com/magic",
+        plan: "Bulanan",
+      })
+    );
+    const link = screen.getByRole("link", { name: /Masuk ke Dashboard/ });
+    expect(link.getAttribute("href")).toBe("https://example.com/magic");
+  });
+
+  it("renders CTA button text 'Masuk ke Dashboard'", () => {
+    render(
+      WelcomeEmail({
+        name: "Budi",
+        magicLink: "https://example.com/magic",
+        plan: "Bulanan",
+      })
+    );
+    expect(screen.getByText("Masuk ke Dashboard")).toBeDefined();
+  });
+
+  it("renders disclaimer text containing 'sekali login'", () => {
+    render(
+      WelcomeEmail({
+        name: "Budi",
+        magicLink: "https://example.com/magic",
+        plan: "Bulanan",
+      })
+    );
+    expect(screen.getByText(/sekali login/)).toBeDefined();
+  });
 });
