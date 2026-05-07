@@ -69,9 +69,17 @@ Plans:
   3. Unauthenticated visitor lands on `/explore` and browses 20–30 seed resources with AVIF thumbnails and looping Mux video previews
   4. Unauthenticated visitor opens a free-tier resource detail page and sees its content render fully without any login prompt
   5. Resources marked `is_premium: true` are visible in the catalog but their detail content is NOT rendered server-side to unauthenticated requests (paywall stub returns 403 / placeholder — full paywall lands in Phase 5)
-**Plans**: TBD
+**Plans**: 6 plans
 **UI hint**: yes
-**Notes**: Research-flagged spike: validate Turbopack + `rehype-pretty-code` + `shiki` integration first. Do NOT use `next-mdx-remote` (CVE-2026-0969, archived), `contentlayer` (unmaintained), or `velite` (Turbopack-incompatible). Use `@next/mdx` + `gray-matter` + dynamic imports + `globby`.
+**Notes**: Turbopack + rehype-pretty-code spike resolved: use string plugin name + serializable options only. Do NOT use `next-mdx-remote` (CVE-2026-0969, archived), `contentlayer` (unmaintained), or `velite` (Turbopack-incompatible). Use `@next/mdx` + `gray-matter` + `fast-glob` + programmatic `@mdx-js/mdx` compile for per-format files (avoids Turbopack static analysis constraint on dynamic imports).
+
+Plans:
+- [ ] 03-01-PLAN.md — Install MDX deps, next.config.ts + mdx-components.tsx, src/lib/content.ts manifest module, unit tests
+- [ ] 03-02-PLAN.md — 20 seed resources: content/resources/**/index.mdx + per-format MDX files
+- [ ] 03-03-PLAN.md — Server components: ThumbnailPlaceholder, VideoPlaceholder, PaywallStub, ResourceCard
+- [ ] 03-04-PLAN.md — Interactive components: CategoryFilterRow, FormatTabBar, CopyButton, CodeBlock
+- [ ] 03-05-PLAN.md — Pages: /explore (ExplorePage) + /explore/[slug] (ResourceDetailPage)
+- [ ] 03-06-PLAN.md — Human verification: build validation, catalog browse, free/premium detail, copy button, CONTENT-06 test
 
 ### Phase 4: Payments & Webhooks
 **Goal**: Mayar.id checkout works end-to-end for monthly and lifetime plans, webhook handlers are idempotent and cross-verified against Mayar's "Get Transaction" API, new member accounts are auto-created and emailed a magic link via Resend, the full membership lifecycle (registered → renewed → canceled-with-grace → expired → tier-changed → lifetime) is correctly modeled in Postgres, and authenticated users can view their account page with a Mayar Customer Portal link.
@@ -103,7 +111,7 @@ Plans:
 **Notes**: Research-flagged spike: iOS Safari Mux autoplay quirks. Pen-test gating with `curl` against every premium endpoint per research pitfall #5 — never trust the browser to enforce access.
 
 ### Phase 6: Discovery & Bookmarks
-**Goal**: Members can find resources fast via Command-K fuzzy search, save resources persistently to Supabase, and view their saved collection on a dedicated page — closing the engagement loop on a stable catalog and verified identity.
+**Goal**: Members can find resources fast via Command-K fuzzy search, save resources persistently to Supabase, and view their saved collection on a dedicated page — closing the engagement loop on a stable catalog and verified user identity.
 **Depends on**: Phase 5
 **Requirements**: DASH-03, DASH-05, DASH-06
 **Success Criteria** (what must be TRUE):
@@ -122,7 +130,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. Marketing Surface | 4/4 | Human verification pending | 2026-05-06 |
 | 2. Auth Foundation | 3/3 | Human verification pending | 2026-05-06 |
-| 3. Content Pipeline & Free-Tier Browse | 0/TBD | Not started | - |
+| 3. Content Pipeline & Free-Tier Browse | 0/6 | Not started | - |
 | 4. Payments & Webhooks | 0/TBD | Not started | - |
 | 5. Paid Content Delivery | 0/TBD | Not started | - |
 | 6. Discovery & Bookmarks | 0/TBD | Not started | - |
