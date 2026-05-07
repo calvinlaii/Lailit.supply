@@ -807,22 +807,22 @@ export default async function AccountPage() {
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Is `data.id` in webhook payload the same as `{id}` in `GET /hl/v1/payment/{id}`?**
    - What we know: Webhook payload has `data.id: string` described as "Webhook ID". Payment detail endpoint takes a UUID path param described as "obtainable from dashboard or initial creation response."
-   - What's unclear: Whether these are the same UUID.
-   - Recommendation: Test with Mayar sandbox immediately. If they differ, cross-verify must first call `GET /hl/v1/transaction?...` or equivalent list endpoint to look up by a matching field.
+   - What was unclear: Whether these are the same UUID.
+   - **RESOLVED (A3):** Proceed on assumption that they match — this is the highest-risk assumption. Plan 03 includes a note to log the raw webhook payload in the first sandbox test to verify. If they differ, crossVerifyWithMayar() must be updated before production deployment. Sandbox URL: `https://api.mayar.club/hl/v1/payment/{id}`.
 
 2. **Does the webhook payload have a `membershipTier` or equivalent field not shown in standard docs?**
    - What we know: Documented payload has `productName` and `productId` but no explicit tier field.
-   - What's unclear: Whether Mayar adds membership-specific fields for membership product types.
-   - Recommendation: Log the full raw webhook payload in dev/staging before writing tier-detection logic. Do not hard-code tier values until a real webhook is received.
+   - What was unclear: Whether Mayar adds membership-specific fields for membership product types.
+   - **RESOLVED (A1):** No explicit tier field confirmed in documented schema. Implementation uses `productName` / `productType` from payload to infer tier via `detectTier()` — case-insensitive match on 'lifetime' and 'seumur hidup' keywords. If Mayar adds an explicit field in future, update `detectTier()` to prefer it.
 
 3. **Does `public.users` table already exist in the Supabase project?**
    - What we know: No `supabase/` directory in repo; no migrations have been committed.
-   - What's unclear: Whether the table was created manually via Supabase Dashboard during Phase 2 setup.
-   - Recommendation: Wave 0 task should verify via Supabase Dashboard before writing migration. Use `CREATE TABLE IF NOT EXISTS` to be safe.
+   - What was unclear: Whether the table was created manually via Supabase Dashboard during Phase 2 setup.
+   - **RESOLVED (A4):** No `public.users` table exists — Phase 4 migration creates it fresh. Migration uses `CREATE TABLE IF NOT EXISTS` to be safe if any manual setup was done. If columns already exist, the `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` fallback in Plan 05 Task 2 handles the partial-table case.
 
 ---
 

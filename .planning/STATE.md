@@ -9,9 +9,9 @@ See: .planning/PROJECT.md (updated 2026-05-05)
 
 ## Current Position
 
-Phase: 4 of 6 (Payments & Webhooks) — IN PROGRESS (discuss complete, planning next)
-Next step: `/gsd-ui-phase 4` → `/gsd-plan-phase 4`
-Last activity: 2026-05-07 — Phase 4 discuss-phase complete: 18 decisions captured in 04-CONTEXT.md
+Phase: 4 of 6 (Payments & Webhooks) — READY TO EXECUTE (5 plans, 4 waves)
+Next step: `/gsd-execute-phase 4`
+Last activity: 2026-05-07 — Phase 4 planned: 5 plans in 4 waves, 14/14 requirements covered, verification passed
 
 Progress: [███░░░░░░░] 50% (3 of 6 phases complete)
 
@@ -73,5 +73,5 @@ Items acknowledged and carried forward from previous milestone close:
 ## Session Continuity
 
 Last session: 2026-05-07
-Stopped at: Phase 4 discuss-phase complete. 04-CONTEXT.md written with 18 decisions. Next: `/gsd-ui-phase 4` then `/gsd-plan-phase 4`.
-Resume file: None
+Stopped at: Phase 4 fully planned — 5 plans verified, 14/14 requirements covered. Next: `/gsd-execute-phase 4`.
+Resume file: .planning/phases/04-payments-webhooks/04-01-PLAN.md
