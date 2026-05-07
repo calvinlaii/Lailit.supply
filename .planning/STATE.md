@@ -5,16 +5,15 @@
 See: .planning/PROJECT.md (updated 2026-05-05)
 
 **Core value:** A premium, multi-platform component library built specifically for the Indonesian/SEA creative dev market — the only one in this niche.
-**Current focus:** Phase 3 — Content Pipeline & Free-Tier Browse
+**Current focus:** Phase 4 — Payments & Webhooks
 
 ## Current Position
 
-Phase: 2 of 6 (Auth Foundation)
-Plan: 3 of 3 in current phase
-Status: Human verification pending — browser tests require live Supabase project with env vars
-Last activity: 2026-05-06 — Phase 2 executed: all 3 plans complete, build passes, 8 tests pass, 13/13 code checks verified
+Phase: 4 of 6 (Payments & Webhooks) — IN PROGRESS (discuss complete, planning next)
+Next step: `/gsd-ui-phase 4` → `/gsd-plan-phase 4`
+Last activity: 2026-05-07 — Phase 4 discuss-phase complete: 18 decisions captured in 04-CONTEXT.md
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 50% (3 of 6 phases complete)
 
 ## Performance Metrics
 
@@ -45,10 +44,11 @@ Recent decisions affecting current work:
 - Init: Indonesia/SEA-first market, Mayar.id (IDR-native), magic-link auth, free-tier (not demo route), monthly + lifetime only at MVP, MDX in repo, Supabase Postgres
 - Init: Next.js 16 with `proxy.ts` (not `middleware.ts`), `@supabase/ssr` (not deprecated auth-helpers), `@next/mdx` (not `next-mdx-remote` — CVE-2026-0969), strict architectural phase ordering enforced by research
 - Phase 2: DAL pattern enforced (`server-only` on dal.ts + admin.ts), `proxy.ts` protects /dashboard + /account, re-login flow uses `shouldCreateUser: false` (no user enumeration), post-login redirect to /dashboard, Supabase default email template
+- Phase 4: Static Mayar hosted links (no server-side checkout), 3-layer webhook defense (URL token + API cross-verify + idempotency ledger), membership fields on `public.users`, React Email + Resend for Bahasa Indonesia welcome email with magic link, static Customer Portal URL
 
 ### Pending Todos
 
-None yet.
+- Phase 2 browser UAT still pending (Supabase OTP issue — skipped to proceed to Phase 3)
 
 ### Blockers/Concerns
 
@@ -72,6 +72,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-06
-Stopped at: Phase 2 executed — 3 plans complete. Pending: browser verification of 7 auth UAT items (requires Supabase project setup + .env.local). See 02-HUMAN-UAT.md for setup steps.
+Last session: 2026-05-07
+Stopped at: Phase 4 discuss-phase complete. 04-CONTEXT.md written with 18 decisions. Next: `/gsd-ui-phase 4` then `/gsd-plan-phase 4`.
 Resume file: None
