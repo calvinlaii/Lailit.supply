@@ -92,9 +92,16 @@ Plans:
   4. After `membership.memberUnsubscribed` fires, the user's status flips to `canceled` but they still load premium content until `membership_expires_at` — and after `membership.memberExpired` fires, the dashboard returns the account-expired page
   5. Lifetime purchasers have `lifetime_purchased = true` and never see expiry behavior regardless of time elapsed
   6. Authenticated user opens `/account` and sees their tier, status, expiry date, plus a working "Manage Subscription" link to the Mayar Customer Portal
-**Plans**: TBD
+**Plans**: 5 plans
 **UI hint**: yes
 **Notes**: Research-flagged gaps to resolve at phase kickoff: (a) Mayar webhook signature mechanism, (b) Customer Portal magic-link API exact shape, (c) sandbox credentials, (d) static IPs for allowlisting. Defense-in-depth (URL token + cross-verification + idempotency ledger) is non-negotiable — this is the highest-risk phase per research pitfalls #1, #2, #4.
+
+Plans:
+- [ ] 04-01-PLAN.md — DB migration SQL (public.users + webhook_events) + Wave 0 test scaffolds (webhook.test.ts, email.test.ts)
+- [ ] 04-02-PLAN.md — Install resend + react-email deps, .env.local.example update, WelcomeEmail template (Bahasa Indonesia)
+- [ ] 04-03-PLAN.md — Webhook route handler: full 3-layer defense + all 5 event handlers + promote test stubs to green
+- [ ] 04-04-PLAN.md — DAL getMembership(), pricing CTA wiring, AccountMembershipCard, /account page, DashboardNav "Akun" link
+- [ ] 04-05-PLAN.md — [BLOCKING] Schema push to Supabase + full test suite + human verification of complete payments surface
 
 ### Phase 5: Paid Content Delivery
 **Goal**: The server-side paywall is fully enforced (curl-tested, not just UI), authenticated members see all five format tabs unlocked with syntax highlighting and copy buttons, Mux video previews and live demos work on iOS Safari, expired/unauthenticated users see appropriate paywall and account-expired pages, and the authenticated dashboard renders the full responsive card grid with category filters.
@@ -131,7 +138,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Marketing Surface | 4/4 | Human verification pending | 2026-05-06 |
 | 2. Auth Foundation | 3/3 | Human verification pending | 2026-05-06 |
 | 3. Content Pipeline & Free-Tier Browse | 0/6 | Not started | - |
-| 4. Payments & Webhooks | 0/TBD | Not started | - |
+| 4. Payments & Webhooks | 0/5 | Not started | - |
 | 5. Paid Content Delivery | 0/TBD | Not started | - |
 | 6. Discovery & Bookmarks | 0/TBD | Not started | - |
 
