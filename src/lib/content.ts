@@ -11,11 +11,13 @@ const CONTENT_ROOT = path.join(process.cwd(), 'content/resources')
 export const ResourceFrontmatterSchema = z.object({
   title: z.string(),
   category: z.enum(['animation', 'ui-components', 'layout', 'interactions']),
+  description: z.string().optional().nullable(),
   tags: z.array(z.string()),
   is_premium: z.boolean(),
   available_formats: z.array(z.enum(['framer', 'webflow', 'html', 'jsx', 'tsx'])),
   mux_playback_id: z.string().nullable(),
   demo_url: z.string().nullable(),
+  published_at: z.string().optional().nullable(),
 })
 
 export type ResourceMeta = z.infer<typeof ResourceFrontmatterSchema> & {
