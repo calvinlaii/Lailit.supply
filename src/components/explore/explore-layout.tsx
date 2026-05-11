@@ -7,6 +7,7 @@ import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { ResourceMeta } from '@/lib/content'
 import { ResourceCard } from '@/components/explore/resource-card'
+import { useLenisOnRef } from '@/hooks/use-lenis-on-ref'
 
 type Category = 'all' | 'animation' | 'ui-components' | 'layout' | 'interactions'
 type SortOrder = 'newest' | 'oldest' | 'az'
@@ -59,6 +60,8 @@ export function ExploreLayout({ resources }: ExploreLayoutProps) {
   const [sortOrder, setSortOrder] = useState<SortOrder>('newest')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const topSearchRef = useRef<HTMLInputElement>(null)
+  const mainRef = useRef<HTMLElement>(null)
+  useLenisOnRef(mainRef)
 
   const totalFree = resources.filter((r) => !r.is_premium).length
 
@@ -143,7 +146,7 @@ export function ExploreLayout({ resources }: ExploreLayoutProps) {
         </div>
 
         {/* Category list */}
-        <nav className="flex-1 overflow-y-auto min-h-0 py-1" aria-label="Filter kategori">
+        <nav className="flex-1 overflow-y-auto min-h-0 py-1" aria-label="Filter kategori" data-lenis-prevent>
           {CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.value
             const count = catCount(cat.value)
@@ -215,7 +218,7 @@ export function ExploreLayout({ resources }: ExploreLayoutProps) {
       </aside>
 
       {/* ── Main ── */}
-      <main className="flex-1 overflow-y-auto min-w-0 bg-[#161616]">
+      <main ref={mainRef} className="flex-1 overflow-y-auto min-w-0 bg-[#161616]">
 
         {/* Sticky topbar */}
         <div className="sticky top-0 z-10 flex items-center gap-4 px-5 h-[82px] bg-[#161616]/90 backdrop-blur-md border-b border-white/[0.05]">

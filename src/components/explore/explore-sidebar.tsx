@@ -77,7 +77,7 @@ export function ExploreSidebar({ resources }: ExploreSidebarProps) {
       </div>
 
       {/* Category list */}
-      <nav className="flex-1 overflow-y-auto min-h-0 py-1" aria-label="Filter kategori">
+      <nav className="flex-1 overflow-y-auto min-h-0 py-1" aria-label="Filter kategori" data-lenis-prevent>
         {CATEGORIES.map((cat) => {
           const count = catCount(cat.value)
           return (

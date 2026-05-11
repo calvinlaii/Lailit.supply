@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Press_Start_2P } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -35,7 +36,9 @@ export default function RootLayout({
         lang="id"
         className={`${geistSans.variable} ${geistMono.variable} ${pressStart2P.variable} h-full antialiased`}
       >
-        <body className="min-h-full flex flex-col">{children}</body>
+        <body className="min-h-full flex flex-col">
+          <SmoothScroll>{children}</SmoothScroll>
+        </body>
       </html>
     </ClerkProvider>
   );

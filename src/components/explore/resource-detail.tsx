@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useUser } from '@clerk/nextjs'
 import { cn } from '@/lib/utils'
 import type { ResourceMeta } from '@/lib/content'
 import { ThumbnailPlaceholder } from '@/components/explore/thumbnail-placeholder'
+import { useLenisOnRef } from '@/hooks/use-lenis-on-ref'
 
 const FORMAT_META: Record<string, { label: string; icon: string }> = {
   framer:  { label: 'Framer',  icon: '/icons/framer.svg' },
@@ -40,9 +41,11 @@ export function ResourceDetail({ resource, related, formatSources }: ResourceDet
     ? (user.firstName ?? user.username ?? user.primaryEmailAddress?.emailAddress ?? 'Calvin')
     : 'Calvin'
   const creatorImage = user?.imageUrl ?? null
+  const scrollRef = useRef<HTMLDivElement>(null)
+  useLenisOnRef(scrollRef)
 
   return (
-    <div className="flex-1 min-w-0 overflow-y-auto bg-[#161616]">
+    <div ref={scrollRef} className="flex-1 min-w-0 overflow-y-auto bg-[#161616]">
       <div className="max-w-[1432px] mx-auto px-8">
 
         {/* ── Header: breadcrumb + title (gap-96 between rows, Figma 37:10278) ── */}

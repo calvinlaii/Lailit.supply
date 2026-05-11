@@ -15,19 +15,19 @@ export function HeroSection() {
             Animasi siap pakai, lima format kode, satu langganan. Buat developer yang nggak mau bikin ulang interaksi yang sama tiap project.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-            {/* Primary CTA */}
+            {/* Primary CTA — new customers, routes through payment */}
             <Link
-              href="/pricing"
+              href="/sign-up"
               className="inline-flex items-center justify-center bg-neutral-950 text-white px-6 py-3 rounded-lg text-base font-semibold hover:bg-neutral-800 active:bg-neutral-900 transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
             >
-              Mulai Sekarang
+              Join
             </Link>
-            {/* Secondary CTA — stubbed (Phase 3 wires /explore) */}
+            {/* Secondary CTA — existing customers */}
             <Link
-              href="/explore"
+              href="/login"
               className="inline-flex items-center justify-center bg-transparent text-neutral-950 border border-neutral-200 px-6 py-3 rounded-lg text-base font-semibold hover:border-neutral-950 active:bg-neutral-50 transition-colors duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
             >
-              Lihat Contoh
+              Login
             </Link>
           </div>
         </div>
