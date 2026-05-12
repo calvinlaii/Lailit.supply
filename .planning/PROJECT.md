@@ -45,15 +45,17 @@ A premium, multi-platform component library built specifically for the Indonesia
 - **Payment architecture**: Mayar.id handles checkout, recurring billing, and customer portal. The backend receives webhooks to create user accounts and manage access. No account creation before payment — cleaner UX.
 - **Content strategy**: Resources ship in 5 formats (Framer, Webflow, HTML, JSX, TSX). MDX files in the repo for MVP. Each resource has: preview thumbnail (avif), short video preview, live demo, per-format code blocks with copy buttons.
 - **Free vs paid split**: A subset of resources is permanently free (no login required or free-tier login). Premium resources are locked behind membership. This is the lead magnet — no separate `/coba` demo route needed.
-- **Tech stack confirmed**: Next.js 16.2.4 App Router, Supabase (Postgres + `@supabase/ssr`), Mayar.id, Resend (magic link + transactional email), Vercel, Discord community.
+- **Tech stack confirmed**: Next.js 16 App Router, Supabase (Postgres + `@supabase/ssr`), Clerk (auth), Mayar.id, Resend (transactional email), Cloudflare Workers via `@opennextjs/cloudflare`, Discord community.
 - **Existing codebase**: Create Next App starter at project root — no product code yet.
 
 ## Constraints
 
-- **Tech stack**: Next.js 16.2.4 App Router — no Pages Router
+- **Tech stack**: Next.js 16 App Router — no Pages Router
 - **Payments**: Mayar.id only at MVP — IDR-native, no Stripe
-- **Database**: Supabase Postgres — use Supabase Auth helpers for session management
-- **Hosting**: Vercel — optimize for serverless edge functions
+- **Database**: Supabase Postgres — DAL pattern with `@supabase/ssr`
+- **Auth**: Clerk (`@clerk/nextjs`) — `clerkMiddleware` runs on Edge runtime
+- **Hosting**: Cloudflare Workers via `@opennextjs/cloudflare` adapter — Edge middleware only (Node middleware not yet supported by adapter)
+- **Middleware file**: `src/middleware.ts` temporarily (not `proxy.ts`) until OpenNext Cloudflare ships proxy support — see opennextjs/opennextjs-cloudflare#972
 - **Email**: Resend — magic link delivery and transactional
 - **Content**: MDX files in repo — no external CMS at MVP
 - **Community**: Discord — not Slack
@@ -70,6 +72,8 @@ A premium, multi-platform component library built specifically for the Indonesia
 | Monthly + Lifetime (no annual at MVP) | Simplest pricing; annual adds 20% discount complexity without MVP signal | — Pending |
 | MDX in repo for content | Free, version-controlled, sufficient for first 100 resources | — Pending |
 | Supabase for Postgres | Free tier generous, built-in auth helpers, great Next.js DX | — Pending |
+| Cloudflare Workers as deploy target (2026-05-13) | User preference over Vercel. Uses `@opennextjs/cloudflare` adapter. Forces Edge runtime for middleware — see middleware.ts vs proxy.ts decision below. | — Pending |
+| `middleware.ts` instead of `proxy.ts` (2026-05-13) | OpenNext Cloudflare hasn't shipped proxy.ts support yet (Next 16 file rename). Clerk requires middleware to run, so use legacy file name. Revert when opennextjs-cloudflare#972 lands. | — Temporary regression |
 
 ## Evolution
 
@@ -89,4 +93,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-05 after initialization*
+*Last updated: 2026-05-13 — added Cloudflare Workers deploy target + middleware.ts temporary regression*
