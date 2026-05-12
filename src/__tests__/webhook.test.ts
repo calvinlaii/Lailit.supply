@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { NextRequest } from "next/server";
 
-// Mock Supabase admin client (used for all DB operations — webhook route has no user session)
-vi.mock("@/lib/supabase/admin", () => ({
-  createAdminClient: vi.fn(),
+// Mock D1 / Drizzle DB (webhook route has no user session — uses raw DB binding)
+vi.mock("@/lib/db", () => ({
+  getDB: vi.fn(),
+  webhookEvents: { _: "webhook_events_table_stub" },
 }));
 
 // Mock Resend (used in handleNewMember for welcome email)
@@ -73,13 +74,13 @@ describe("POST /api/webhooks/mayar — token validation (PAY-04, T-4-01)", () =>
     expect(res.status).toBe(401);
   });
 
-  it("does not proceed to DB on invalid token (no admin client calls)", async () => {
-    const { createAdminClient } = await import("@/lib/supabase/admin");
+  it("does not proceed to DB on invalid token (no getDB calls)", async () => {
+    const { getDB } = await import("@/lib/db");
     const POST = await importPost();
     process.env.MAYAR_WEBHOOK_TOKEN = "correct-secret";
     const req = makeRequest("wrong-secret", validPayload);
     await POST(req);
-    expect(createAdminClient).not.toHaveBeenCalled();
+    expect(getDB).not.toHaveBeenCalled();
   });
 });
 
@@ -119,13 +120,12 @@ describe("POST /api/webhooks/mayar — idempotency (PAY-08)", () => {
   });
 
   it("returns 200 with no side effects when mayar_event_id already exists (UNIQUE violation)", async () => {
-    const { createAdminClient } = await import("@/lib/supabase/admin");
-    const mockInsert = vi.fn().mockResolvedValue({
-      error: { code: "23505", message: "duplicate key value" },
-    });
-    (createAdminClient as ReturnType<typeof vi.fn>).mockReturnValue({
-      from: vi.fn().mockReturnValue({ insert: mockInsert }),
-    });
+    const { getDB } = await import("@/lib/db");
+    const insertValues = vi.fn().mockRejectedValue(
+      new Error("D1_ERROR: UNIQUE constraint failed: webhook_events.mayar_event_id")
+    );
+    const insert = vi.fn().mockReturnValue({ values: insertValues });
+    (getDB as ReturnType<typeof vi.fn>).mockReturnValue({ insert });
 
     const POST = await importPost();
     const req = makeRequest("correct-secret", validPayload);
@@ -137,15 +137,13 @@ describe("POST /api/webhooks/mayar — idempotency (PAY-08)", () => {
 });
 
 describe("POST /api/webhooks/mayar — membership.newMemberRegistered (PAY-03, AUTH-05)", () => {
-  it.todo("creates Supabase auth user when user does not exist");
-  it.todo("skips createUser when user already exists (re-subscription)");
-  it.todo("inserts public.users row with membership_tier inferred from productName");
-  it.todo("calls resend.emails.send with WelcomeEmail after user creation");
+  it.todo("upserts users row with membership_tier inferred from productName (Clerk userId)");
+  it.todo("calls resend.emails.send with WelcomeEmail after user upsert");
   it.todo("sets processed_at on webhook_events row after handling");
 });
 
 describe("POST /api/webhooks/mayar — payment.received (PAY-04)", () => {
-  it.todo("updates membership_expires_at on public.users for matching email");
+  it.todo("updates membership_expires_at on users for matching email");
 });
 
 describe("POST /api/webhooks/mayar — membership.memberUnsubscribed (PAY-05)", () => {
@@ -157,7 +155,7 @@ describe("POST /api/webhooks/mayar — membership.memberExpired (PAY-06)", () =>
 });
 
 describe("POST /api/webhooks/mayar — membership.changeTierMemberRegistered (PAY-07)", () => {
-  it.todo("updates membership_tier on public.users");
+  it.todo("updates membership_tier on users");
 });
 
 describe("POST /api/webhooks/mayar — lifetime purchaser (PAY-10)", () => {

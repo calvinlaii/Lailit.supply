@@ -11,6 +11,24 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "routes": [
+    { "pattern": "lailitsupply.com", "custom_domain": true },
+    { "pattern": "www.lailitsupply.com", "custom_domain": true }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "lailit-bucket"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lailit-db",
+      "database_id": "b0d6b64b-ae56-43de-8e8a-2d60098a97b1",
+      "migrations_dir": "drizzle/migrations"
+    }
+  ],
   "observability": {
     "enabled": true
   }

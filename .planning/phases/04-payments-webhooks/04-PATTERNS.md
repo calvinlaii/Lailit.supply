@@ -1,3 +1,6 @@
+
+> **MIGRATION NOTE 2026-05-13:** This plan was written against Supabase Postgres + `@supabase/ssr`. The project has since migrated to **Cloudflare D1 + Drizzle ORM** (schema in `src/lib/db/schema.ts`, migrations in `drizzle/migrations/`, DB binding `env.DB` via `getCloudflareContext()`). Auth is **Clerk** (`@clerk/nextjs`), not Supabase magic-link. Re-run `/gsd-plan-phase 4` before executing.
+
 # Phase 4: Payments & Webhooks — Pattern Map
 
 **Mapped:** 2026-05-07

@@ -41,14 +41,16 @@ Progress: [███░░░░░░░] 50% (3 of 6 phases complete)
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- Init: Indonesia/SEA-first market, Mayar.id (IDR-native), magic-link auth, free-tier (not demo route), monthly + lifetime only at MVP, MDX in repo, Supabase Postgres
-- Init: Next.js 16 with `proxy.ts` (not `middleware.ts`), `@supabase/ssr` (not deprecated auth-helpers), `@next/mdx` (not `next-mdx-remote` — CVE-2026-0969), strict architectural phase ordering enforced by research
-- Phase 2: DAL pattern enforced (`server-only` on dal.ts + admin.ts), `proxy.ts` protects /dashboard + /account, re-login flow uses `shouldCreateUser: false` (no user enumeration), post-login redirect to /dashboard, Supabase default email template
-- Phase 4: Static Mayar hosted links (no server-side checkout), 3-layer webhook defense (URL token + API cross-verify + idempotency ledger), membership fields on `public.users`, React Email + Resend for Bahasa Indonesia welcome email with magic link, static Customer Portal URL
+- Init: Indonesia/SEA-first market, Mayar.id (IDR-native), magic-link auth, free-tier (not demo route), monthly + lifetime only at MVP, MDX in repo
+- Init: Next.js 16 with `proxy.ts` (not `middleware.ts`), `@next/mdx` (not `next-mdx-remote` — CVE-2026-0969), strict architectural phase ordering enforced by research
+- Phase 2: Auth migrated to Clerk (`@clerk/nextjs`) — `clerkMiddleware` in `src/middleware.ts`, DAL via `currentUser()` in dal.ts. Supabase magic-link approach abandoned.
+- **2026-05-13: DB migrated Supabase Postgres → Cloudflare D1 + Drizzle ORM.** Schema in `src/lib/db/schema.ts`, migrations in `drizzle/migrations/`, accessed via `getCloudflareContext().env.DB`. Phase 4 plans need re-planning before execute.
+- Phase 4: Static Mayar hosted links (no server-side checkout), 3-layer webhook defense (URL token + API cross-verify + idempotency ledger), membership fields on `users` table keyed by Clerk userId, React Email + Resend for Bahasa Indonesia welcome email, static Customer Portal URL
 
 ### Pending Todos
 
-- Phase 2 browser UAT still pending (Supabase OTP issue — skipped to proceed to Phase 3)
+- Phase 2 browser UAT obsoleted by Clerk migration — re-validate Clerk sign-in flow during Phase 4 UAT
+- Phase 4 plans (04-01 through 04-05) reference Supabase — re-run `/gsd-plan-phase 4` to regenerate against D1/Drizzle before executing
 
 ### Blockers/Concerns
 

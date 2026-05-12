@@ -43,6 +43,9 @@ metrics:
   files_modified: 0
 ---
 
+> **MIGRATION NOTE 2026-05-13:** This plan was written against Supabase Postgres + `@supabase/ssr`. The project has since migrated to **Cloudflare D1 + Drizzle ORM** (schema in `src/lib/db/schema.ts`, migrations in `drizzle/migrations/`, DB binding `env.DB` via `getCloudflareContext()`). Auth is **Clerk** (`@clerk/nextjs`), not Supabase magic-link. Re-run `/gsd-plan-phase 4` before executing.
+
+
 # Phase 4 Plan 01: Wave 0 Schema Migration and Test Scaffolds Summary
 
 **One-liner:** Postgres migration for membership schema (5 columns + webhook_events idempotency ledger) and Wave 0 test contracts covering token validation, cross-verify, and idempotency behaviors.

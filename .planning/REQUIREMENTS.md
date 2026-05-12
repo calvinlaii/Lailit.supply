@@ -51,7 +51,7 @@
 - [ ] **DASH-02**: User can filter resources by category
 - [ ] **DASH-03**: User can search resources by name/tag via command-K (⌘K) fuzzy search
 - [ ] **DASH-04**: Each resource card shows free vs premium indicator, hover video preview, and title
-- [ ] **DASH-05**: User can save/bookmark a resource; saved state persists to Supabase across sessions
+- [ ] **DASH-05**: User can save/bookmark a resource; saved state persists to Cloudflare D1 across sessions
 - [ ] **DASH-06**: User can view all their saved resources on a dedicated `/dashboard/saved` page
 
 ### Resource Detail (RES)
@@ -80,7 +80,7 @@
 ### Email Delivery (EMAIL)
 
 - [ ] **EMAIL-01**: New member receives a branded magic-link welcome email via Resend within seconds of Mayar webhook firing
-- [ ] **EMAIL-02**: Magic-link email expires after 24 hours (Supabase OTP expiry configured to 86400s)
+- [ ] **EMAIL-02**: Magic-link email expires after 24 hours (Clerk session token TTL configured to 24h)
 - [ ] **EMAIL-03**: User can request a new magic link from the login page at any time
 
 ---

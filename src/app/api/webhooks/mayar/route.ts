@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { getDB, webhookEvents } from "@/lib/db";
 
 // Wave 0 stub: implements token validation, cross-verify, and idempotency layers only.
 // Full event handler dispatch is implemented in Plan 03.
@@ -80,20 +80,21 @@ export async function POST(request: NextRequest) {
   }
 
   // Layer 3: Idempotency — INSERT first (PAY-08)
-  const supabase = createAdminClient();
-  const { error: insertError } = await supabase
-    .from("webhook_events")
-    .insert({
-      mayar_event_id: transactionId,
-      event_type: body["event.received"],
+  // D1/SQLite surfaces UNIQUE-constraint violations via an error message that
+  // contains "UNIQUE constraint failed" — match on that for the idempotent path.
+  const db = getDB();
+  try {
+    await db.insert(webhookEvents).values({
+      mayarEventId: transactionId,
+      eventType: body["event.received"],
       payload: body,
     });
-
-  if (insertError) {
-    if (insertError.code === "23505") {
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    if (msg.includes("UNIQUE constraint failed")) {
       return new Response("Already processed", { status: 200 });
     }
-    console.error("webhook_events insert failed:", insertError);
+    console.error("webhook_events insert failed:", err);
     return new Response("DB error", { status: 500 });
   }
 

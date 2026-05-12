@@ -13,7 +13,7 @@ lailit.supply ships as a paywalled, multi-format component library for the Indon
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Marketing Surface** - Public landing, pricing, legal, login, and mobile-responsive shell with no backend dependencies
-- [ ] **Phase 2: Auth Foundation** - Magic-link auth via Supabase + Resend, DAL pattern, `proxy.ts`, session continuity
+- [ ] **Phase 2: Auth Foundation** - Auth via Clerk (`@clerk/nextjs`), DAL pattern, middleware-protected routes — _migrated 2026-05-13: Supabase magic-link → Clerk; DB → Cloudflare D1 + Drizzle_
 - [ ] **Phase 3: Content Pipeline & Free-Tier Browse** - MDX architecture, Zod-validated frontmatter, build-time manifest, public free-tier catalog
 - [ ] **Phase 4: Payments & Webhooks** - Mayar checkout for monthly + lifetime, idempotent webhook handlers, auto user creation, account page
 - [ ] **Phase 5: Paid Content Delivery** - Server-side paywall, format tabs, Mux preview, syntax-highlighted code, copy buttons, dashboard grid
@@ -41,7 +41,9 @@ Plans:
 - [ ] 01-04-PLAN.md — Login page with validated no-op form; /legal/privacy-policy and /legal/terms-and-conditions
 
 ### Phase 2: Auth Foundation
-**Goal**: Magic-link authentication is fully operational via Supabase + Resend, the Data Access Layer (DAL) pattern is enforced, `proxy.ts` (Next.js 16's renamed middleware) protects routes, and session continuity works across refresh and tabs — establishing the security primitives Phase 4's webhook handler will call into.
+> _**Migration note (2026-05-13):** This phase was originally planned around Supabase magic-link, then migrated to Clerk. The DB layer was migrated again from Supabase Postgres → Cloudflare D1 + Drizzle ORM. The plan files below are historical; current truth is in code (`src/lib/dal.ts`, `src/middleware.ts`, `src/lib/db/`)._
+
+**Goal**: Authentication is fully operational via Clerk (`@clerk/nextjs`), the Data Access Layer (DAL) pattern is enforced, `src/middleware.ts` (temporarily, until OpenNext Cloudflare lands proxy.ts) protects routes, and session continuity works across refresh and tabs — establishing the security primitives Phase 4's webhook handler will call into.
 **Depends on**: Phase 1
 **Requirements**: AUTH-01, AUTH-02, AUTH-03, AUTH-04, GATE-05, EMAIL-02, EMAIL-03
 **Success Criteria** (what must be TRUE):
@@ -101,7 +103,7 @@ Plans:
 - [ ] 04-02-PLAN.md — Install resend + react-email deps, .env.local.example update, WelcomeEmail template (Bahasa Indonesia)
 - [ ] 04-03-PLAN.md — Webhook route handler: full 3-layer defense + all 5 event handlers + promote test stubs to green
 - [ ] 04-04-PLAN.md — DAL getMembership(), pricing CTA wiring, AccountMembershipCard, /account page, DashboardNav "Akun" link
-- [ ] 04-05-PLAN.md — [BLOCKING] Schema push to Supabase + full test suite + human verification of complete payments surface
+- [ ] 04-05-PLAN.md — [BLOCKING] Schema apply via `wrangler d1 migrations apply lailitsupply --remote` + full test suite + human verification of complete payments surface
 
 ### Phase 5: Paid Content Delivery
 **Goal**: The server-side paywall is fully enforced (curl-tested, not just UI), authenticated members see all five format tabs unlocked with syntax highlighting and copy buttons, Mux video previews and live demos work on iOS Safari, expired/unauthenticated users see appropriate paywall and account-expired pages, and the authenticated dashboard renders the full responsive card grid with category filters.
@@ -118,12 +120,12 @@ Plans:
 **Notes**: Research-flagged spike: iOS Safari Mux autoplay quirks. Pen-test gating with `curl` against every premium endpoint per research pitfall #5 — never trust the browser to enforce access.
 
 ### Phase 6: Discovery & Bookmarks
-**Goal**: Members can find resources fast via Command-K fuzzy search, save resources persistently to Supabase, and view their saved collection on a dedicated page — closing the engagement loop on a stable catalog and verified user identity.
+**Goal**: Members can find resources fast via Command-K fuzzy search, save resources persistently to Cloudflare D1, and view their saved collection on a dedicated page — closing the engagement loop on a stable catalog and verified user identity.
 **Depends on**: Phase 5
 **Requirements**: DASH-03, DASH-05, DASH-06
 **Success Criteria** (what must be TRUE):
   1. Authenticated member presses ⌘K (Cmd-K) anywhere in the dashboard and a fuzzy search modal opens, returning results matched by title and tags via fuse.js
-  2. Member clicks the bookmark icon on any resource card and the saved state persists across logout/login and across browsers (round-trips to Supabase, not localStorage)
+  2. Member clicks the bookmark icon on any resource card and the saved state persists across logout/login and across browsers (round-trips to D1, not localStorage)
   3. Member visits `/dashboard/saved` and sees exactly the resources they have bookmarked, with the same card layout as the main grid
 **Plans**: TBD
 **UI hint**: yes
