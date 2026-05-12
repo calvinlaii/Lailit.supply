@@ -45,7 +45,7 @@ async function crossVerifyWithMayar(
     return { valid: false, httpStatus: 400 };
   }
 
-  const json = await res.json();
+  const json = (await res.json()) as { statusCode?: number; data?: unknown };
   if (json.statusCode !== 200 || !json.data) {
     return { valid: false, httpStatus: 400 };
   }

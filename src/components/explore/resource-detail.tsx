@@ -116,6 +116,7 @@ export function ResourceDetail({ resource, related, formatSources }: ResourceDet
             <ThumbnailPlaceholder
               category={resource.category}
               title={resource.title}
+              thumbnailKey={resource.thumbnail_key}
               className="w-full h-full aspect-auto"
             />
           </div>
@@ -286,7 +287,7 @@ export function ResourceDetail({ resource, related, formatSources }: ResourceDet
                   href={`/explore/${r.slug}`}
                   className="group block bg-[#161616] rounded-[15px] overflow-hidden shadow-[0px_0px_0px_1px_rgba(255,255,255,0.06)] hover:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.15)] transition-all duration-200"
                 >
-                  <ThumbnailPlaceholder category={r.category} title={r.title} className="aspect-[4/3]" />
+                  <ThumbnailPlaceholder category={r.category} title={r.title} thumbnailKey={r.thumbnail_key} className="aspect-[4/3]" />
                   <div className="px-3.5 py-2.5">
                     <span className="text-[13px] font-semibold text-white leading-none line-clamp-1">
                       {r.title}

@@ -17,7 +17,7 @@ const CATEGORY_ICONS: Record<string, string> = {
 }
 
 export function ResourceCard({ resource, className }: ResourceCardProps) {
-  const { slug, title, category, is_premium } = resource
+  const { slug, title, category, is_premium, thumbnail_key } = resource
   const icon = is_premium ? '/icons/cta-lock.svg' : (CATEGORY_ICONS[category] ?? '/icons/cat-buttons.svg')
 
   return (
@@ -28,7 +28,7 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
       >
         <div className="relative overflow-hidden rounded-[15px] bg-[#161616] shadow-[0px_0px_0px_1px_rgba(255,255,255,0.06)] group-hover:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.15)] transition-all duration-200 ease-out">
           {/* Thumbnail */}
-          <ThumbnailPlaceholder category={category} title={title} />
+          <ThumbnailPlaceholder category={category} title={title} thumbnailKey={thumbnail_key} />
 
           {/* Hover overlay */}
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200" />

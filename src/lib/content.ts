@@ -18,6 +18,7 @@ export const ResourceFrontmatterSchema = z.object({
   mux_playback_id: z.string().nullable(),
   demo_url: z.string().nullable(),
   published_at: z.string().optional().nullable(),
+  thumbnail_key: z.string().optional().nullable(),
 })
 
 export type ResourceMeta = z.infer<typeof ResourceFrontmatterSchema> & {

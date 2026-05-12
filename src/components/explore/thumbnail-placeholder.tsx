@@ -4,6 +4,7 @@ type ThumbnailPlaceholderProps = {
   category: 'animation' | 'ui-components' | 'layout' | 'interactions'
   title: string
   className?: string
+  thumbnailKey?: string | null
 }
 
 function AnimationThumb() {
@@ -107,7 +108,22 @@ const THUMBS = {
   interactions: InteractionsThumb,
 }
 
-export function ThumbnailPlaceholder({ category, title, className }: ThumbnailPlaceholderProps) {
+export function ThumbnailPlaceholder({ category, title, className, thumbnailKey }: ThumbnailPlaceholderProps) {
+  if (thumbnailKey) {
+    return (
+      <div className={cn('w-full aspect-[4/3] overflow-hidden', className)}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`/media/${thumbnailKey}`}
+          alt={`${title} thumbnail`}
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )
+  }
+
   const Thumb = THUMBS[category]
   return (
     <div
